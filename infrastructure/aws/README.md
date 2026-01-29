@@ -182,19 +182,19 @@ OpenChamber supports two modes for HTTPS setup: **Auto Mode** (recommended) and 
 CDK automatically creates an ACM certificate and configures DNS using your Route53 Hosted Zone.
 
 **Prerequisites:**
-- Route53 Hosted Zone for your domain (e.g., `opencode.devices.amazon.dev`)
+- Route53 Hosted Zone for your domain (e.g., `example.com`)
 
 **Configuration:**
 ```bash
 # In .env file
-DOMAIN_NAME=opencode.devices.amazon.dev
+DOMAIN_NAME=openchamber.example.com
 HOSTED_ZONE_ID=Z0123456789ABCDEFGHIJ
-HOSTED_ZONE_NAME=opencode.devices.amazon.dev
+HOSTED_ZONE_NAME=example.com
 ```
 
 **Find your Hosted Zone ID:**
 ```bash
-aws route53 list-hosted-zones --query 'HostedZones[?Name==`opencode.devices.amazon.dev.`].Id' --output text
+aws route53 list-hosted-zones --query 'HostedZones[?Name==`example.com.`].Id' --output text
 ```
 
 **What CDK Does Automatically:**
@@ -207,7 +207,7 @@ aws route53 list-hosted-zones --query 'HostedZones[?Name==`opencode.devices.amaz
 - Fully automated setup
 - No manual DNS records to create
 - Certificate auto-renews via DNS validation
-- Matches AWS best practices (used by Jazz and other internal tools)
+- Follows AWS best practices
 
 ### Manual Mode (Legacy)
 
@@ -457,6 +457,10 @@ For issues with:
 - **OpenChamber:** [GitHub Issues](https://github.com/btriapitsyn/openchamber/issues)
 - **This Infrastructure:** Create issue in your fork
 - **AWS Services:** [AWS Support](https://aws.amazon.com/support/)
+
+## Credits
+
+This AWS infrastructure is designed for [OpenChamber](https://github.com/btriapitsyn/openchamber), an open-source web interface for [OpenCode](https://opencode.ai) AI coding agents. Special thanks to the OpenChamber maintainers for creating this excellent tool.
 
 ## License
 

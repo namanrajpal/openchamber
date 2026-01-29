@@ -36,9 +36,13 @@ fi
 
 # Get ECR repository URI from CloudFormation outputs
 echo "→ Getting ECR repository URI from CloudFormation..."
-ECR_URI=381492023020.dkr.ecr.us-west-2.amazonaws.com/openchamber
+ECR_URI=$(aws cloudformation describe-stacks \
+  --stack-name "$STACK_NAME" \
+  --query 'Stacks[0].Outputs[?OutputKey==`ECRRepositoryUri`].OutputValue' \
+  --output text \
+  --region "$AWS_REGION" 2>&1)
 
-if [ -z "$ECR_URI" ] || [[ "$ECR_URI" == *"does not exist"* ]]; then
+if [ -z "$ECR_URI" ] || [[ "$ECR_URI" == *"does not exist"* ]] || [[ "$ECR_URI" == "None" ]]; then
   echo "ERROR: Could not get ECR repository URI"
   echo "Make sure the CDK stack is deployed:"
   echo "  cd infrastructure/aws && ./scripts/deploy.sh"
