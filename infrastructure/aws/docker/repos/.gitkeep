@@ -1,0 +1,6 @@
+# Place your local repositories in this directory before building.
+# They will be copied to /workspace/repos/ inside the container.
+#
+# Example:
+#   cp -r ~/Projects/my-api infrastructure/aws/docker/repos/
+#   docker build -t openchamber:local -f infrastructure/aws/docker/Dockerfile .
